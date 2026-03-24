@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Birthday Dharshini 🎉</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #e6f7ff, #f3e8ff);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    /* Balloons */
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff, #dfefff);
+      animation: floatUp 10s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-120vh);
+      }
+    }
+
+    /* Button */
+    #btn {
+      position: absolute;
+      padding: 12px 20px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(90deg, #ffffff, #e0f7ff, #f3e8ff);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      font-size: 16px;
+    }
+
+    /* Cartoon helper */
+    #helper {
+      position: absolute;
+      bottom: 20px;
+      left: -150px;
+      width: 100px;
+      display: none;
+      transition: left 2s ease;
+    }
+
+    /* Question box */
+    #questionBox {
+      display: none;
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 15px;
+      border: 1px solid #ccc;
+      width: 200px;
+    }
+
+    /* Final message */
+    #finalMsg {
+      display: none;
+      text-align: center;
+      margin-top: 80px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<h1>🎉 Happy Birthday Dharshini 🎂</h1>
+
+<button id="btn">🎁 Catch Me</button>
+
+<!-- Cartoon image (replace with your own if you want) -->
+<img id="helper" src="https://i.imgur.com/3ZQ3Z6F.png">
+
+<div id="questionBox">
+  <p>😏 Got it! Answer this to unlock:</p>
+  <p><b>Are you the birthday star today? 🌟</b></p>
+  <input type="text" id="answer" placeholder="Type anything...">
+  <br><br>
+  <button onclick="unlock()">Unlock 🎉</button>
+</div>
+
+<div id="finalMsg">
+  🎉 Happy Birthday Dharshini! 🎂<br>
+  Hope you have a beautiful year ahead ✨<br><br>
+  – Srisaran 🙂
+</div>
+
+<script>
+
+let btn = document.getElementById("btn");
+let helper = document.getElementById("helper");
+let chasing = true;
+
+// balloons generator
+function createBalloons() {
+  for (let i = 0; i < 20; i++) {
+    let b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = Math.random() * window.innerWidth + "px";
+    b.style.animationDuration = (6 + Math.random() * 6) + "s";
+    document.body.appendChild(b);
+  }
+}
+createBalloons();
+
+// initial button position
+btn.style.left = "45%";
+btn.style.top = "50%";
+
+// button escape
+document.addEventListener("mousemove", () => {
+  if (chasing) {
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 50);
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+  }
+});
+
+// after 5 sec → helper enters
+setTimeout(() => {
+  chasing = false;
+
+  helper.style.display = "block";
+  helper.style.left = "40%";
+
+  btn.style.left = "50%";
+  btn.style.top = "60%";
+
+  setTimeout(() => {
+    document.getElementById("questionBox").style.display = "block";
+  }, 1500);
+
+}, 5000);
+
+// unlock
+function unlock() {
+  document.getElementById("questionBox").style.display = "none";
+  document.getElementById("btn").style.display = "none";
+  document.getElementById("helper").style.display = "none";
+
+  document.getElementById("finalMsg").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
